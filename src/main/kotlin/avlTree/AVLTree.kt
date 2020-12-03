@@ -17,4 +17,20 @@ class AVLTree {
         else if (y == null) x.height
         else x.height - y.height
 
+    fun addByKey(node: Node?, key: Int, value: Int, dad: Node?): Node? {
+        if (node == null) {
+            return Node(key, value, dad)
+        }
+        val compareRes = key.compareTo(node.key)
+        if (compareRes > 0) {
+            node.right = addByKey(node.right, key, value, node)
+            node.height = height(node.left, node.right) + 1
+        } else if (compareRes < 0) {
+            node.left = addByKey(node.left, key, value, node)
+            node.height = height(node.left, node.right) + 1
+        } else {
+            node.value = value
+        }
+        return node
+    }
 }
