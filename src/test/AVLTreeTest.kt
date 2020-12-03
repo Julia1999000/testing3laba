@@ -37,4 +37,20 @@ internal class AVLTreeTest {
 
         assertEquals(avl.height(null, node2), 1)
     }
+
+    @Test
+    fun balanceAVLTreeTest() {
+        val node1 = Node(1, 1, null)
+        val node2 = Node(2, 2, null)
+        assertEquals(avl.balance(node1, node2), 0)
+
+        node1.height = 3
+        assertEquals(avl.balance(node1, node2), 2)
+
+        assertEquals(avl.balance(null, null), 0)
+
+        assertEquals(avl.balance(node1, null), 3)
+
+        assertEquals(avl.balance(null, node2), -1)
+    }
 }
