@@ -7,10 +7,9 @@ import org.junit.Assert.assertEquals
 import org.junit.Test
 
 internal class AVLTreeTest {
-    var avl: AVLTree = AVLTree()
 
     @Test
-    fun ConstructorNodeTest() {
+    fun constructorNodeTest() {
         val node = Node(1, 1, null)
 
         Assert.assertEquals(node.height.toLong(), 1)
@@ -24,6 +23,8 @@ internal class AVLTreeTest {
 
     @Test
     fun heightAVLTreeTest() {
+        val avl = AVLTree()
+
         val node1 = Node(1, 1, null)
         val node2 = Node(2, 2, null)
         assertEquals(avl.height(node1, node2), 1)
@@ -40,6 +41,8 @@ internal class AVLTreeTest {
 
     @Test
     fun balanceAVLTreeTest() {
+        val avl = AVLTree()
+
         val node1 = Node(1, 1, null)
         val node2 = Node(2, 2, null)
         assertEquals(avl.balance(node1, node2), 0)
@@ -52,5 +55,25 @@ internal class AVLTreeTest {
         assertEquals(avl.balance(node1, null), 3)
 
         assertEquals(avl.balance(null, node2), -1)
+    }
+
+    @Test
+    fun addByKeyAVLTreeTest() {
+        val avl = AVLTree()
+
+        var root: Node = avl.addByKey(null, 2, 2, null)
+        Assert.assertNotNull(root)
+
+        root = avl.addByKey(root, 3, 3, null)
+        assertEquals(root.right!!.key, 3)
+
+        root = avl.addByKey(root, 1, 1, null)
+        assertEquals(root.left!!.key, 1)
+
+        root = avl.addByKey(root, 1, 1, null)
+        assertEquals(root.left!!.key, 1)
+
+        root = avl.addByKey(root, 0, 0, null)
+        assertEquals(root.left!!.left!!.key, 0)
     }
 }

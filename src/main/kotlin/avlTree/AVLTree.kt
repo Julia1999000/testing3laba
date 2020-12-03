@@ -17,7 +17,7 @@ class AVLTree {
         else if (y == null) x.height
         else x.height - y.height
 
-    fun addByKey(node: Node?, key: Int, value: Int, dad: Node?): Node? {
+    fun addByKey(node: Node?, key: Int, value: Int, dad: Node?): Node {
         if (node == null) {
             return Node(key, value, dad)
         }
