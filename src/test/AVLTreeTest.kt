@@ -76,4 +76,28 @@ internal class AVLTreeTest {
         root = avl.addByKey(root, 0, 0, null)
         assertEquals(root.left!!.left!!.key, 0)
     }
+
+    @Test
+    fun leftRotationAVLTreeTest() {
+        val avl = AVLTree()
+        var root: Node? = avl.addByKey(null, 1, 1, null)
+        root = avl.addByKey(root, 2, 2, null)
+        root = avl.addByKey(root, 3, 3, null)
+        root = avl.leftRotation(root)
+        assertEquals(root?.key, 2)
+        assertEquals(root?.left?.key, 1)
+        assertEquals(root?.right?.key, 3)
+    }
+
+    @Test
+    fun rightRotationAVLTreeTest() {
+        val avl = AVLTree()
+        var root: Node? = avl.addByKey(null, 3, 3, null)
+        root = avl.addByKey(root, 2, 2, null)
+        root = avl.addByKey(root, 1, 1, null)
+        root = avl.rightRotation(root)
+        assertEquals(root?.key, 2)
+        assertEquals(root?.left?.key, 1)
+        assertEquals(root?.right?.key, 3)
+    }
 }
