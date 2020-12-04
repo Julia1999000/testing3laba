@@ -155,4 +155,18 @@ internal class AVLTreeTest {
         val res: Int = avl.min(avl.root)!!.value
         assertEquals(res.toLong(), 1)
     }
+
+    @Test
+    fun maxAVLTreeTest() {
+        val avl = AVLTree()
+        avl.add(1, 1)
+        avl.add(2, 2)
+        avl.add(3, 3)
+        avl.add(4, 4)
+        avl.add(5, 5)
+        avl.add(6, 6)
+        avl.add(7, 7)
+        val res: Int = avl.max(avl.root)!!.value
+        assertEquals(res.toLong(), 7)
+    }
 }
