@@ -137,4 +137,8 @@ class AVLTree {
     fun get(key: Int): Int? {
         return getJust(root, key)
     }
+
+    fun min(nodeAVL: Node?): Node? {
+        return if (nodeAVL!!.left == null) nodeAVL else min(nodeAVL.left)
+    }
 }
