@@ -141,4 +141,8 @@ class AVLTree {
     fun min(nodeAVL: Node?): Node? {
         return if (nodeAVL!!.left == null) nodeAVL else min(nodeAVL.left)
     }
+
+    fun max(nodeAVL: Node?): Node? {
+        return if (nodeAVL!!.right == null) nodeAVL else max(nodeAVL.right)
+    }
 }
