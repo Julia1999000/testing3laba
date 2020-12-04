@@ -145,4 +145,52 @@ class AVLTree {
     fun max(nodeAVL: Node?): Node? {
         return if (nodeAVL!!.right == null) nodeAVL else max(nodeAVL.right)
     }
+
+
+    fun deleteJust(nodeAVL: Node?, key: Int): Node? {
+        var node: Node? = nodeAVL ?: return null
+        val compareResult = key.compareTo(node!!.key)
+        if (compareResult > 0) {
+            node.right = deleteJust(node.right, key)
+        } else if (compareResult < 0) {
+            node.left = deleteJust(node.left, key)
+        } else {
+            if (node.right == null && node.left == null) {
+                node = null
+            } else if (node.right == null) {
+                node.left!!.dad = node.dad
+                node = node.left
+            } else if (node.left == null) {
+                node.right!!.dad = node.dad
+                node = node.right
+            } else {
+                if (node.right!!.left == null) {
+                    node.right!!.left = node.left
+                    node.right!!.dad = node.dad
+                    node.right!!.dad = node.dad
+                    node.left!!.dad = node.right
+                    node = node.right
+                } else {
+                    val res = min(node.right)
+                    node.key = res!!.key
+                    node.value = res.value
+                    deleteJust(node.right, node.key)
+                }
+            }
+        }
+        if (node != null) {
+            node.height = height(node.left, node.right) + 1
+            node.balance = balance(node.left, node.right)
+            if (node.balance == -2) {
+                node = leftRotation(node)
+            } else if (node.balance == 2) {
+                node = rightRotation(node)
+            }
+        }
+        return node
+    }
+
+    fun delete(key: Int) {
+        root = deleteJust(root, key)
+    }
 }
