@@ -89,14 +89,18 @@ class AVLTree {
     fun addJust(nodeAVL: Node, key: Int, value: Int?, dad: Node?): Node {
         var node = nodeAVL ?: return Node(key, value!!, dad)
         val compareResult = key.compareTo(node.key)
-        if (compareResult > 0) {
-            node.right = addJust(node.right!!, key, value, node)
-            node.height = height(node.left, node.right) + 1
-        } else if (compareResult < 0) {
-            node.left = addJust(node.left!!, key, value, node)
-            node.height = height(node.left, node.right) + 1
-        } else {
-            node.value = value!!
+        when {
+            compareResult > 0 -> {
+                node.right = addJust(node.right!!, key, value, node)
+                node.height = height(node.left, node.right) + 1
+            }
+            compareResult < 0 -> {
+                node.left = addJust(node.left!!, key, value, node)
+                node.height = height(node.left, node.right) + 1
+            }
+            else -> {
+                node.value = value!!
+            }
         }
         node.balance = balance(node.left, node.right)
         if (node.balance == -2) {
@@ -107,7 +111,7 @@ class AVLTree {
         return node
     }
 
-    
+
     fun add(key: Int, value: Int?) {
         root = addJust(root!!, key, value, null)
     }
