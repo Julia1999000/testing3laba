@@ -111,8 +111,30 @@ class AVLTree {
         return node
     }
 
-
     fun add(key: Int, value: Int?) {
         this.root = addJust(this.root, key, value, null)
+    }
+
+
+    fun getJust(nodeAVL: Node?, key: Int): Int? {
+        if (nodeAVL == null) {
+            return null
+        }
+        val compareResult = key.compareTo(nodeAVL.key)
+        return when {
+            compareResult == 0 -> {
+                nodeAVL.value
+            }
+            compareResult > 0 -> {
+                getJust(nodeAVL.right, key)
+            }
+            else -> {
+                getJust(nodeAVL.left, key)
+            }
+        }
+    }
+
+    fun get(key: Int): Int? {
+        return getJust(root, key)
     }
 }
