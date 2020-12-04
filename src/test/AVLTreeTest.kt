@@ -169,4 +169,27 @@ internal class AVLTreeTest {
         val res: Int = avl.max(avl.root)!!.value
         assertEquals(res.toLong(), 7)
     }
+
+    @Test
+    fun deleteAVLTreeTest() {
+        val avl = AVLTree()
+        avl.add(1, 1)
+        avl.add(2, 2)
+        avl.add(3, 3)
+        avl.add(4, 4)
+        avl.add(5, 5)
+        avl.add(6, 6)
+        avl.add(7, 7)
+        avl.delete(4)
+        val node: Node = avl.root!!
+        assertEquals(node.key, 5)
+        val leftRoot = node.left
+        assertEquals(leftRoot!!.key, 2)
+        assertEquals(leftRoot.left!!.key, 1)
+        assertEquals(leftRoot.right!!.key, 3)
+        val rightRoot = node.right
+        assertEquals(rightRoot!!.key, 6)
+        Assert.assertNull(rightRoot.left)
+        assertEquals(rightRoot.right!!.key, 7)
+    }
 }
