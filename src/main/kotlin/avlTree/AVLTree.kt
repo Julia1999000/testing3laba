@@ -33,4 +33,56 @@ class AVLTree {
         }
         return node
     }
+
+    fun leftRotation(nodeAVL: Node?): Node? {
+        var node = nodeAVL
+        if (node!!.right!!.right == null && node.right!!.left != null) {
+            node.right = rightRotation(node.right)
+            node = leftRotation(node)
+        } else if (node.right!!.left == null || node.right!!.left!!.height <= node.right!!.right!!.height) {
+            val newnode = node.right
+            newnode!!.dad = node.dad
+            node.right = newnode.left
+            if (node.right != null) {
+                node.right!!.dad = node
+            }
+            node.height = height(node.left, node.right) + 1
+            node.dad = newnode
+            node.balance = balance(node.left, node.right)
+            newnode.left = node
+            node = newnode
+            node.balance = balance(node.left, node.right)
+            node.height = height(node.left, node.right) + 1
+        } else {
+            node.right = rightRotation(node.right)
+            node = leftRotation(node)
+        }
+        return node
+    }
+
+    fun rightRotation(nodeAVL: Node?): Node? {
+        var node = nodeAVL
+        if (node!!.left!!.right != null && node.left!!.left == null) {
+            node.left = leftRotation(node.left)
+            node = rightRotation(node)
+        } else if (node.left!!.right == null || node.left!!.right!!.height <= node.left!!.left!!.height) {
+            val newnode = node.left
+            newnode!!.dad = node.dad
+            node.left = newnode.right
+            if (node.left != null) {
+                node.left!!.dad = node
+            }
+            node.height = height(node.left, node.right) + 1
+            node.dad = newnode
+            node.balance = balance(node.left, node.right)
+            newnode.right = node
+            node = newnode
+            node.balance = balance(node.left, node.right)
+            node.height = height(node.left, node.right) + 1
+        } else {
+            node.left = leftRotation(node.left)
+            node = rightRotation(node)
+        }
+        return node
+    }
 }
